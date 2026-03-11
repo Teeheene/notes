@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+		<script src="script.js" defer></script>
+	</head>
+	<body>
+		<a href="../index.html">back</a>
+		<h1>Server</h1>
+		<div id="notes">
+			<h3>Notes</h3>
+			<p>client server architecture is composed of <strong>client</strong> and <strong>server</strong>.</p>
+			<ul>
+				<li><strong>client</strong> is a mchine or program that allows user to <strong>make requests</strong> through the web</li>
+				<li><strong>server</strong> is a program that <strong>serves</strong> the requests of multiple clients</li>
+			</ul>
+			<p><strong>NodeJS</strong> is a js runtime environment that enables js to be executed outside a browser</p>
+		</div>
+
+		<h3>form for adding users</h3>
+		<form id="userform">
+			<label for="name">name</label>
+			<input type="text" id="name" name="name">
+			<input type="submit" id="adduser" value="submit">
+			<br><br>
+		</form>
+
+		<button onClick="test()">test route /</button>
+		<button onClick="testUsers()">test route /users</button>
+		<button onClick="testNonRoute()">test undefined route</button>
+	</body>
+</html>

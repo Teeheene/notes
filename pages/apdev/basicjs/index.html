@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>js syntax</title>
+	</head>
+	<body>
+		<a href="../index.html">home</a>
+		<h1>Basic Js</h1>
+		<h3>internal vs external vs inline</h3>
+		<p>
+			internal is script inside of body, external in head, and inline in.. line
+		</p>
+		<h3>writing script</h3>
+		<p>Dont forget to defer when writing script, like &lt;script href="someScript.js" defer&gt; </p>
+		
+		
+		<h3>if else, switch, loop demo</h3>
+		<script>
+			//IF ELSE, SWITCH
+			let x = 3
+			if(x == 1)
+				document.write("x is equal to 1")
+			else if(x == 2)
+				document.write("x is equal to 2")
+			else
+				document.write("x is neither 1 nor 2")
+
+			document.write("<br>")
+
+			switch(x) {
+				case 1: document.write("x = 1"); break
+				case 2: document.write("x = 2"); break
+				default: document.write("x =/= 1 || 2")
+			}
+
+			document.write("<br>")
+
+			let i = 0
+			let n = 3
+			while(i < n) {
+				document.write(i + ",")
+				i++
+			}
+
+			document.write("<br>")
+
+			i = 0
+			n = 3
+			do {
+				document.write(i + ",")
+				i++
+			} while(i < n)
+
+			document.write("<br>")
+
+			for(i = 0; i < n; i++)
+				document.write(i + ",")
+		</script>
+
+		<h3>function demo</h3>
+		<script>
+			function sayHello() {
+				alert("Hello there")
+			}
+
+			const sayHi = () => {
+				alert("Hi there")
+			}
+
+			function sayHelloX(name) {
+				alert("Hello there " + name + "!")
+			}
+
+		</script>
+
+		<form action="">
+			<input type="button"
+				onclick="sayHello()"
+				value="Say Hello"/>
+		</form>
+
+		<form action="">
+			<input type="button"
+				onclick="sayHi()"
+				value="Say Hi"/>
+		</form>
+
+		<form action="">
+			<input type="button"
+				onclick="sayHelloX('diane')"
+				value="Say Hello again"/>
+		</form>
+
+		<h3>array demo</h3>
+
+		<script>
+			let arr = new Array(3)
+			let colors = new Array("blue", "red", "yellow")
+			let colors2 = ["blue", "red", "yellow"]
+
+			function printArr(arr) { 
+				for(i = 0; i < arr.length; i++)
+					document.write(arr[i] + ", ")
+				document.write("<br>")
+			}
+
+			printArr(colors)
+
+			colors[0];
+			colors[1] = "green"
+			colors[3] = "pink"
+			colors.push("red", "white")
+			colors.unshift("grey", "black")
+			colors.splice(1,0,"silver", "green")
+			colors.splice(1,1,"silber")
+			colors.pop() //removed white
+			colors.length = 5
+			colors.shift()
+			colors.splice(1,2)
+
+
+			printArr(colors)
+		</script>
+
+		<h3>object demo</h3>
+
+		<script>
+			let p = {
+				fName: "Jimmy",
+				lName: "Neutron",
+				age: 40
+			}
+
+			var p1 = new Object()
+			p1.fName = "Jummee"
+			p1.lName = "Newton"
+			p1.age = 50
+
+			function showObj(obj) {
+				let arr = Object.values(obj)
+				document.write(arr + "<br>")
+			}
+
+			showObj(p)
+			showObj(p1)
+
+			//reference to p
+			var p2 = p
+			p2.fName = "Hugh"
+			showObj(p)
+			
+			document.write(p.lName + ", ")
+			document.write(p["fName"] + "<br>")
+
+			const p3 = {
+				fname: "Jabee",
+				lname: "Neutrawn"
+			}
+			
+			for(let x in p3)
+				document.write(p3[x] + " ")
+			document.write("<br>")
+			
+			p3.age = 20
+			p3.eyeColor = "brown"
+
+			showObj(p3)
+
+			delete p3.eyeColor
+
+			showObj(p3)
+
+			let job = {
+				hours: 40,
+				ratePerHour: 500,
+				set rate(val) {
+					this.ratePerHour = val;
+				}
+			}
+
+			job.getSalary = function() {
+				return this.hours * this.ratePerHour
+			}
+
+			document.write("salary is " + job.getSalary() + "<br>")
+
+			job.rate = 600
+			document.write("salary is " + job.getSalary() + "<br>")
+
+		</script>
+
+		<h3>class demo</h3>
+
+		<script>
+			class Person {
+				constructor(fname, lname, age) {
+					this.fname = fname
+					this.lname = lname
+					this.age = age
+				}
+			}
+
+			let p4 = new Person("Adam", "Sons", 50)
+			showObj(p4)
+		</script>
+	</body>
+</html>
