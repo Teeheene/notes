@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>		
+		<h3>Navigation</h3>
+		<a href="/create.html">create user | </a>
+		<a href="/users.html">view all users</a>
+
+		<div id="userInfo">
+			<p>Loading user...</p>
+		</div>
+
+		<div id="actions">
+			<button id="deleteBtn">Delete User</button>
+			<br>
+			<br>
+			<form id="updateForm">
+				<input name="name" Placeholder="name" required><br>
+				<input name="email" Placeholder="email" required><br>
+				<input name="age" type="number" Placeholder="age" required><br>
+				<button type="submit">Update</button>
+			</form>
+		</div>
+		
+		<script>
+			//user id from url query string	
+			const params = new URLSearchParams(window.location.search)
+			const userId = params.get("id")
+
+			const userInfo = document.getElementById("userInfo")
+			const updateForm = document.getElementById("updateForm")
+			const deleteBtn = document.getElementById("deleteBtn")
+
+			if (!userId) {
+				userInfo.innerHTML = "<p>No user ID provided!</p>"
+			} else {
+				fetch("/users/" + userId)
+					.then(res => res.json())
+					.then(user => {
+						if(user.error){
+							userInfo.innerHTML = `<p>${user.error}</p>`
+						} else {
+							userInfo.innerHTML = `
+								<h2>${user.name}</h2>
+								<p><strong>Email:</strong> ${user.email}</p>
+								<p><strong>Age:</strong> ${user.age}</p>
+								<p><strong>ID:</strong> ${user._id}</p>
+								`		
+							updateForm.name.value = user.name
+							updateForm.email.value = user.email
+							updateForm.age.value = user.age
+						}
+					})
+
+				updateForm.addEventListener("submit", e => {
+					e.preventDefault()
+					const data = Object.fromEntries(new FormData(updateForm))
+					fetch("/users/" + userId, {
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(data)
+					})
+						.then(() => {
+							alert("User updated!")
+							location.reload()
+						})
+					})
+
+				deleteBtn.addEventListener("click", () => {
+					if(confirm("Are you sure?")) {
+						fetch("/users/" + userId, { method: "DELETE" })
+							.then(() => {
+								alert("User deleted!")
+								window.location.href = "users.html"
+							})
+					}
+				})
+			}
+		</script>
+
+
+	</body>
+</html>

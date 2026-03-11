@@ -5,6 +5,51 @@
 		<title></title>
 	</head>
 	<body>
+		<h3>Notes</h3>
+		<p>Docs to remember when viewing the code for users are the following</p>
+		<ul>
+			<li>
+					Express Routing:
+					<a href="https://expressjs.com/en/guide/routing.html" target="_blank">
+							https://expressjs.com/en/guide/routing.html
+					</a>
+			</li>
+			<li>
+					MongoDB Node.js Driver:
+					<a href="https://www.mongodb.com/docs/drivers/node/current/quick-start/" target="_blank">
+							https://www.mongodb.com/docs/drivers/node/current/quick-start/
+					</a>
+			</li>
+			<li>
+        Fetch API:
+      	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" target="_blank">
+            https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+    		</a>
+    	</li>
+		</ul>
+		<h3>Navigation</h3>
+		<a href="/create.html">create user | </a>
+		<a href="/">back</a>
 		<h1>Users</h1>		
+		<ul id="list"></ul>
+
+		<script>
+			fetch("/users")
+			.then(res => res.json())
+			.then(users => {
+				 const list = document.getElementById("list")
+				 users.forEach(u => {
+						const li = document.createElement("li")
+						li.innerHTML = `${u.name}`
+						li.style.cursor = "pointer"
+						li.addEventListener("click", () => {
+							window.location.href= `viewuser.html?id=${u._id}`
+						})
+						
+						list.appendChild(li)
+				 })
+			})
+		</script>
+
 	</body>
 </html>
